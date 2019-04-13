@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sztf2_nhf", "Sztf2_nhf\Sztf2_nhf.csproj", "{7B619F52-6606-4C04-B5FC-9BA3CDF6B38B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B619F52-6606-4C04-B5FC-9BA3CDF6B38B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B619F52-6606-4C04-B5FC-9BA3CDF6B38B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B619F52-6606-4C04-B5FC-9BA3CDF6B38B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B619F52-6606-4C04-B5FC-9BA3CDF6B38B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43CA9148-FCA3-4BD8-8C27-A938CB7BCAE7}
+	EndGlobalSection
+EndGlobal

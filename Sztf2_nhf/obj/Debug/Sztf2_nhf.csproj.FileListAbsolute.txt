@@ -1,0 +1,7 @@
+C:\Users\Admin\source\repos\Sztf2_nhf\Sztf2_nhf\bin\Debug\Sztf2_nhf.exe.config
+C:\Users\Admin\source\repos\Sztf2_nhf\Sztf2_nhf\bin\Debug\Sztf2_nhf.exe
+C:\Users\Admin\source\repos\Sztf2_nhf\Sztf2_nhf\bin\Debug\Sztf2_nhf.pdb
+C:\Users\Admin\source\repos\Sztf2_nhf\Sztf2_nhf\obj\Debug\Sztf2_nhf.csprojAssemblyReference.cache
+C:\Users\Admin\source\repos\Sztf2_nhf\Sztf2_nhf\obj\Debug\Sztf2_nhf.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\Sztf2_nhf\Sztf2_nhf\obj\Debug\Sztf2_nhf.exe
+C:\Users\Admin\source\repos\Sztf2_nhf\Sztf2_nhf\obj\Debug\Sztf2_nhf.pdb
