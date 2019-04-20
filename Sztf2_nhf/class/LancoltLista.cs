@@ -86,19 +86,30 @@ namespace Sztf2_nhf
             return lista;
         }
 
-        public static LancoltLista ListaFeldolgozas(LancoltLista lista,int szelesseg, int hosszusag, int magassag)
+        public LancoltLista ListaFeldolgozas(LancoltLista lista,int szelesseg, int hosszusag, int magassag,ref int darab)
         {
             ListaElem p = lista.fej;
+            int nemFerBeDB = 0;
             while (p != null)
             {
                 if (JoAdat(p, szelesseg, hosszusag, magassag) == false)
-                    lista = Kitorol(p,lista);
-                p = p.kovetkezo;
+                {
+                    lista = Kitorol(p, lista);
+                    OnNemFerBe(darab,nemFerBeDB);
+                    nemFerBeDB++;
+                    p = p.kovetkezo;
+                }
+                else
+                {
+                    p = p.kovetkezo;
+                    darab++;
+                }
+                
             }
             return lista;
         }
 
-        private static bool JoAdat(ListaElem elem, int szelesseg, int hosszusag, int magassag)
+        private bool JoAdat(ListaElem elem, int szelesseg, int hosszusag, int magassag)
         {
             if (elem.tartalom.Hosszusag > hosszusag)
                 return false;
@@ -107,6 +118,13 @@ namespace Sztf2_nhf
             else if (elem.tartalom.Magassag > magassag)
                 return false;
             else return true;
+        }
+        public delegate void NemFerBeEventHandler(object source, ButorEventArgs args);
+        public event NemFerBeEventHandler NemFerBe;
+        protected virtual void OnNemFerBe(int sorozatszam, int nemferbedb)
+        {
+            if (NemFerBe != null)
+                NemFerBe(this, new ButorEventArgs() { SorozatSzam = sorozatszam + nemferbedb + 1 });
         }
     }
 }

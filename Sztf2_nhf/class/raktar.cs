@@ -13,24 +13,23 @@ namespace Sztf2_nhf
         public int Szelesseg { get; private set; }
         public int Hosszusag { get; private set; }
         public int Magassag { get; private set; }
-        public delegate void NemFerBeEventHandler(object source, EventArgs args);
-        public event NemFerBeEventHandler NemFerBe;
+
 
         public Raktar(int szelesseg, int magassag, int hossz)
         {
-            this.ButorDarab = 0;
             this.Szelesseg = szelesseg;
             this.Hosszusag = hossz;
             this.Magassag = magassag;
-            this.lista = new LancoltLista();
+            lista = new LancoltLista();
             lista = AdatBeolvasas.Beolvas(lista,ButorDarab);
-            lista = LancoltLista.ListaFeldolgozas(lista,Szelesseg,Hosszusag,Magassag);
         }
 
-        protected virtual void OnNemFerBe(int sorozatszam)
+        public void AdatHelyessegEllenorzes()
         {
-            if (NemFerBe != null)
-                NemFerBe(this, new ButorEventArgs() { SorozatSzam = sorozatszam });
+            int darabseged = 0;
+            lista = lista.ListaFeldolgozas(lista, Szelesseg, Hosszusag, Magassag, ref darabseged);
+            ButorDarab = darabseged;
         }
+        
     }
 }
