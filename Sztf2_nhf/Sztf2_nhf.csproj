@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BTS.cs" />
+    <Compile Include="class\BTS.cs" />
+    <Compile Include="class\ButorEventArgs.cs" />
     <Compile Include="class\AlapException.cs" />
     <Compile Include="class\AlacsonyButor.cs" />
     <Compile Include="class\AlloButor.cs" />

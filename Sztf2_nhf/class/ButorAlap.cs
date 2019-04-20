@@ -18,5 +18,10 @@ namespace Sztf2_nhf
             this.Hosszusag = hossz;
         }
         //public abstract override string ToString();
+
+        public override bool Equals(object obj)
+        {
+            return (obj as ButorAlap).Szelesseg.Equals(this.Szelesseg) && (obj as ButorAlap).Hosszusag.Equals(this.Hosszusag) && (obj as ButorAlap).Magassag.Equals(this.Magassag);
+        }
     }
 }

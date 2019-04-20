@@ -8,7 +8,7 @@ namespace Sztf2_nhf
 {
     class LancoltLista
     {
-        ListaElem fej;
+        private ListaElem fej;
 
         class ListaElem
         {
@@ -59,6 +59,54 @@ namespace Sztf2_nhf
         private void Feldolgoz(ListaElem elem)
         {
             Console.WriteLine(">\t{0} \t|", elem.tartalom);
+        }
+
+        private static LancoltLista Kitorol(ListaElem elem, LancoltLista lista)
+        {
+            ListaElem elozoElem = null, p = lista.fej;
+            while (p != null)
+            {
+                if (p.tartalom.Equals(elem.tartalom))
+                {
+                    if (elozoElem == null)
+                    {
+                        lista.fej.kovetkezo = p.kovetkezo;
+                    }
+                    else
+                    {
+                        elozoElem.kovetkezo = p.kovetkezo;
+                    }
+                }
+                else
+                {
+                    elozoElem = p;
+                }
+                p = p.kovetkezo;
+            }
+            return lista;
+        }
+
+        public static LancoltLista ListaFeldolgozas(LancoltLista lista,int szelesseg, int hosszusag, int magassag)
+        {
+            ListaElem p = lista.fej;
+            while (p != null)
+            {
+                if (JoAdat(p, szelesseg, hosszusag, magassag) == false)
+                    lista = Kitorol(p,lista);
+                p = p.kovetkezo;
+            }
+            return lista;
+        }
+
+        private static bool JoAdat(ListaElem elem, int szelesseg, int hosszusag, int magassag)
+        {
+            if (elem.tartalom.Hosszusag > hosszusag)
+                return false;
+            else if (elem.tartalom.Szelesseg > szelesseg)
+                return false;
+            else if (elem.tartalom.Magassag > magassag)
+                return false;
+            else return true;
         }
     }
 }
