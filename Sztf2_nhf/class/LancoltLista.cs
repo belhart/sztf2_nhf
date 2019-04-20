@@ -27,21 +27,23 @@ namespace Sztf2_nhf
 
         public void VegereBeszuras(ButorAlap elem)
         {
-            ListaElem p = fej;
             ListaElem uj = new ListaElem();
             uj.tartalom = elem;
             uj.kovetkezo = null;
-            if(p == null)
+            if(fej == null)
             {
                 fej = uj;
+                return;
             }
             else
             {
+                ListaElem p = fej;
                 while (p.kovetkezo != null)
                 {
                     p = p.kovetkezo;
                 }
                 p.kovetkezo = uj;
+                return;
             }     
         }
 

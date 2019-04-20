@@ -15,9 +15,9 @@ namespace Sztf2_nhf
 
         }
 
-        public override string ToString()
+        /*public override string ToString()
         {
             throw new NotImplementedException();
-        }
+        }*/
     }
 }

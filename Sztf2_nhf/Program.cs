@@ -10,9 +10,8 @@ namespace Sztf2_nhf
     {
         static void Main(string[] args)
         {
-            LancoltLista lista = new LancoltLista();
-            AdatBeolvasas.Beolvas(lista);
-            lista.Bejaras();
+            Raktar raktar = new Raktar(10,30);
+            raktar.lista.Bejaras();
         }
     }
 }

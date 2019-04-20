@@ -17,6 +17,6 @@ namespace Sztf2_nhf
             this.Magassag = magas;
             this.Hosszusag = hossz;
         }
-        public abstract override string ToString();
+        //public abstract override string ToString();
     }
 }

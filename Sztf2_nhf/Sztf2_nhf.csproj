@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="class\AlapException.cs" />
     <Compile Include="class\AlacsonyButor.cs" />
     <Compile Include="class\AlloButor.cs" />
     <Compile Include="class\ButorAlap.cs" />
@@ -50,8 +51,11 @@
     <Compile Include="interface\IMeret.cs" />
     <Compile Include="class\NormalButor.cs" />
     <Compile Include="class\LancoltLista.cs" />
+    <Compile Include="class\NincsTobbHelyButornakTeljesRendezesElottException.cs" />
+    <Compile Include="class\NincsTobbHelyButornakTeljesRendezesUtanException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="class\Raktar.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

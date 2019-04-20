@@ -12,10 +12,10 @@ namespace Sztf2_nhf
 
         public override double Alapterulet { get { return Alapterulet; } set { Alapterulet = AlapTeruletek(); } }
 
-        public override string ToString()
+        /*public override string ToString()
         {
             throw new NotImplementedException();
-        }
+        }*/
 
         private double AlapTeruletek()
         {
