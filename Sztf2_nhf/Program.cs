@@ -10,7 +10,7 @@ namespace Sztf2_nhf
     {
         static void Main(string[] args)
         {
-            Raktar raktar = new Raktar(10,30);
+            Raktar raktar = new Raktar(10,30,40);
             raktar.lista.Bejaras();
         }
     }

@@ -9,17 +9,19 @@ namespace Sztf2_nhf
     class Raktar
     {
         public LancoltLista lista { get; private set; }
-        private int ButorDarab { get; set; }
+        public int ButorDarab { get; set; } //lista hossza is egyben
         public int Szelesseg { get; private set; }
         public int Hosszusag { get; private set; }
+        public int Magassag { get; private set; }
 
-        public Raktar(int szelesseg, int hossz)
+        public Raktar(int szelesseg, int hossz, int magassag)
         {
-            ButorDarab = 0;
-            lista = new LancoltLista(); 
-            lista = AdatBeolvasas.Beolvas(lista);
+            this.ButorDarab = 0;
             this.Szelesseg = szelesseg;
             this.Hosszusag = hossz;
+            this.Magassag = magassag;
+            this.lista = new LancoltLista();
+            AdatBeolvasas.Beolvas(this);
         }
     }
 }
