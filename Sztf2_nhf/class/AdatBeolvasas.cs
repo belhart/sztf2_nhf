@@ -7,7 +7,7 @@ namespace Sztf2_nhf
 {
     class AdatBeolvasas
     {
-        public static void Beolvas(LancoltLista lista)
+        public static LancoltLista Beolvas(LancoltLista lista)
         {
             string[] lines = File.ReadAllLines(@"adatok.txt");
             foreach (string line in lines)
@@ -29,6 +29,8 @@ namespace Sztf2_nhf
                     lista.VegereBeszuras(uj);
                 }
             }
+
+            return lista;
         }
     }
 }
