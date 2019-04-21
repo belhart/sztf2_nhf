@@ -33,7 +33,6 @@ namespace Sztf2_nhf
                     if (Fk(E, R[szint, i], szint)) // adott ember foglalt-e már
                     {
                         E[szint] = R[szint, i];
-
                         if (szint == (R.GetLength(0) - 1))
                             van = true;
                         else

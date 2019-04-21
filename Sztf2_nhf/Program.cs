@@ -19,7 +19,6 @@ namespace Sztf2_nhf
             raktar.lista.NemFerBe += OnNemFerBe;
             raktar.AdatHelyessegEllenorzes();
             raktar.lista.Bejaras();
-            //test
         }
     }
 }
