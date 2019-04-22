@@ -17,7 +17,15 @@ namespace Sztf2_nhf
         {
             Raktar raktar = new Raktar(600,3600,45);
             raktar.lista.NemFerBe += OnNemFerBe;
+            Console.WriteLine("Az adatok beolvasasa közbeni problémák:");
             raktar.AdatHelyessegEllenorzes();
+            Console.ReadLine();
+            bool vege = false;
+            while (vege != true)
+            {
+                Console.WriteLine("123");
+                Console.ReadLine();
+            }
             raktar.lista.Bejaras();
         }
     }

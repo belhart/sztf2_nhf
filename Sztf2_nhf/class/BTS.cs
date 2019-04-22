@@ -28,9 +28,9 @@ namespace Sztf2_nhf
             while (!van && i < M[szint])
             {
                 i++;
-                if (Ft(szint, R[szint, i])) // adott szinten i. ember alkalmas-e a szerepre
+                if (Ft(szint, R[szint, i]))
                 {
-                    if (Fk(E, R[szint, i], szint)) // adott ember foglalt-e már
+                    if (Fk(E, R[szint, i], szint))
                     {
                         E[szint] = R[szint, i];
                         if (szint == (R.GetLength(0) - 1))
