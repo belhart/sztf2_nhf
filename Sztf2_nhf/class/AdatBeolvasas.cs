@@ -14,7 +14,6 @@ namespace Sztf2_nhf
             foreach (string line in lines)
             {
                 string[] SplittedLine = line.Split();
-                  
                 if(SplittedLine[0] == "NORM")
                 {
                     NormalButor uj = new NormalButor(int.Parse(SplittedLine[1]),int.Parse(SplittedLine[2]),int.Parse(SplittedLine[3]),ID);

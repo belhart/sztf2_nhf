@@ -10,7 +10,7 @@ namespace Sztf2_nhf
     {
         static void OnNemFerBe(object source, ButorEventArgs e)
         {
-            Console.WriteLine(e.SorozatSzam + " nem fer be");
+            Console.WriteLine(e.SorozatSzam + ". sorbani butor nem fer be");
         }
 
         static void Main(string[] args)
