@@ -19,14 +19,34 @@ namespace Sztf2_nhf
             raktar.lista.NemFerBe += OnNemFerBe;
             Console.WriteLine("Az adatok beolvasasa közbeni problémák:");
             raktar.AdatHelyessegEllenorzes();
+            Console.WriteLine("Sikeresen beolvasott butorok");
+            raktar.lista.Bejaras();
+            Console.WriteLine("Enter a folytatashoz");
             Console.ReadLine();
             bool vege = false;
             while (vege != true)
             {
-                Console.WriteLine("123");
-                Console.ReadLine();
+                Console.Clear();
+                Console.WriteLine("Opciók\n\n1. bútorok kilistázása\n2. bútor kihozás\n3. kilépés");
+                Console.Write("Választott opció: ");
+                string opcio = Console.ReadLine();
+                switch (opcio)
+                {
+                    case "1":
+                        Console.Clear();
+                        raktar.lista.Bejaras();
+                        Console.WriteLine("Enter a folytatashoz");
+                        Console.ReadLine();
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        vege = true;
+                        break;
+                    default:
+                        break;
+                }
             }
-            raktar.lista.Bejaras();
         }
     }
 }
