@@ -21,7 +21,6 @@ namespace Sztf2_nhf
             ListaElem uj = new ListaElem();
             uj.tartalom = elem;
             uj.kovetkezo = fej;
-
             fej = uj;
         }
 

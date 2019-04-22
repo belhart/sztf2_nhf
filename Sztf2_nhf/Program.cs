@@ -39,6 +39,9 @@ namespace Sztf2_nhf
                         Console.ReadLine();
                         break;
                     case "2":
+                        Console.Clear();
+                        Console.Write("Kihozni kivant butor ID-je");
+                        int kihozButorId = int.Parse(Console.ReadLine());
                         break;
                     case "3":
                         vege = true;
