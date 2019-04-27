@@ -9,5 +9,6 @@ namespace Sztf2_nhf
     class AlapException : Exception
     {
         public string HibaUzenet { get; set; }
+        public ButorAlap elem { get; set; }
     }
 }

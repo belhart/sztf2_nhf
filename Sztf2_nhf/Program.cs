@@ -8,7 +8,7 @@ namespace Sztf2_nhf
 {
     class Program
     {
-        static void OnNemFerBe(object source, ButorEventArgs e)
+        static void OnNemFerBeAlap(object source, ButorEventArgs e)
         {
             Console.WriteLine(e.SorozatSzam + ". sorbani butor nem fer be");
         }
@@ -16,11 +16,12 @@ namespace Sztf2_nhf
         static void Main(string[] args)
         {
             Raktar raktar = new Raktar(600,3600,45);
-            raktar.lista.NemFerBe += OnNemFerBe;
+            raktar.lista.NemFerBeAlap += OnNemFerBeAlap;
             Console.WriteLine("Az adatok beolvasasa közbeni problémák:");
             raktar.AdatHelyessegEllenorzes();
             Console.WriteLine("Sikeresen beolvasott butorok");
             raktar.lista.Bejaras();
+            raktar.OsszesButorElhelyezeseARaktarban();
             Console.WriteLine("Enter a folytatashoz");
             Console.ReadLine();
             bool vege = false;

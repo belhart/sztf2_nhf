@@ -46,9 +46,27 @@ namespace Sztf2_nhf
             }     
         }
 
+        public ButorAlap NElem(int i)
+        {
+            ListaElem p = fej;
+            int n = 0;
+            while (p != null)
+            {
+                if (n == i)
+                    return p.tartalom;
+                else
+                {
+                    i++;
+                    p = p.kovetkezo;
+                }
+            }
+            p = fej;
+            return p.kovetkezo.tartalom;
+        }
+
         public void Bejaras()
         {
-            ListaElem p = fej; // referencia mutató !
+            ListaElem p = fej;
             while (p != null)
             {
                 Feldolgoz(p);
@@ -119,11 +137,11 @@ namespace Sztf2_nhf
             else return true;
         }
         public delegate void NemFerBeEventHandler(object source, ButorEventArgs args);
-        public event NemFerBeEventHandler NemFerBe;
+        public event NemFerBeEventHandler NemFerBeAlap;
         protected virtual void OnNemFerBe(int sorozatszam)
         {
-            if (NemFerBe != null)
-                NemFerBe(this, new ButorEventArgs() { SorozatSzam = sorozatszam});
+            if (NemFerBeAlap != null)
+                NemFerBeAlap(this, new ButorEventArgs() { SorozatSzam = sorozatszam});
         }
     }
 }
