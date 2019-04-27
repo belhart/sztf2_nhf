@@ -16,7 +16,7 @@ namespace Sztf2_nhf
 
         public override string ToString()
         {
-            string szoveg = string.Format("ID: {0} + , ALA, SZELESSEG: {1} + MAGASSAG: {2} HOSSZUSAG: {3}", ID.ToString(), Szelesseg.ToString(), Magassag.ToString(), Hosszusag.ToString());
+            string szoveg = string.Format("ID: {0} , ALA, SZELESSEG: {1} + MAGASSAG: {2} HOSSZUSAG: {3}", ID.ToString(), Szelesseg.ToString(), Magassag.ToString(), Hosszusag.ToString());
             return szoveg;
         }
     }

@@ -93,8 +93,8 @@ namespace Sztf2_nhf
             {
                 if (JoAdat(p, szelesseg, hosszusag, magassag) == false)
                 {
-                    lista = Kitorol(p, lista);
-                    OnNemFerBe(darab,nemFerBeDB);
+                    OnNemFerBe(p.tartalom.ID);
+                    lista = Kitorol(p, lista); 
                     nemFerBeDB++;
                     p = p.kovetkezo;
                 }
@@ -120,10 +120,10 @@ namespace Sztf2_nhf
         }
         public delegate void NemFerBeEventHandler(object source, ButorEventArgs args);
         public event NemFerBeEventHandler NemFerBe;
-        protected virtual void OnNemFerBe(int sorozatszam, int nemferbedb)
+        protected virtual void OnNemFerBe(int sorozatszam)
         {
             if (NemFerBe != null)
-                NemFerBe(this, new ButorEventArgs() { SorozatSzam = sorozatszam + nemferbedb + 1 });
+                NemFerBe(this, new ButorEventArgs() { SorozatSzam = sorozatszam});
         }
     }
 }
