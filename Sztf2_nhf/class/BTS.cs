@@ -78,6 +78,12 @@ namespace Sztf2_nhf
             }
         }
 
+        public static void Kihoz()
+        {
+
+        }
+
+
         public static void RaktarGrafKiir(int[,] E)
         {
             Console.Clear();
