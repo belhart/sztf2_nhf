@@ -53,7 +53,6 @@ namespace Sztf2_nhf
                                     E[j, k] = elemSeged.ID;
                                 }
                             }
-                            //RaktarGrafKiir(E);
                             if (Osszdarab == darab)
                                 van = true;
                             else
@@ -63,6 +62,7 @@ namespace Sztf2_nhf
                     catch (NincsTobbHelyButornakTeljesRendezesUtanException)
                     {
                         //OnNemFerBe(elemSeged.ID);
+                        //Forgatasal elfer?
                         Console.WriteLine("NEMFERBEEXCEPTIONIDE");
                         if (darab > Osszdarab)
                         {
