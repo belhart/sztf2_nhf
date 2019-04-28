@@ -60,8 +60,7 @@ namespace Sztf2_nhf
                     p = p.kovetkezo;
                 }
             }
-            p = fej;
-            return p.kovetkezo.tartalom;
+            return null;
         }
 
         public void Bejaras()
@@ -78,12 +77,37 @@ namespace Sztf2_nhf
             Console.WriteLine(">\t{0} \t|", elem.tartalom);
         }
 
-        private static LancoltLista Kitorol(ListaElem elem, LancoltLista lista)
+        private LancoltLista KitorolElem(ListaElem elem, LancoltLista lista)
         {
             ListaElem elozoElem = null, p = lista.fej;
             while (p != null)
             {
                 if (p.tartalom.Equals(elem.tartalom))
+                {
+                    if (elozoElem == null)
+                    {
+                        lista.fej.kovetkezo = p.kovetkezo;
+                    }
+                    else
+                    {
+                        elozoElem.kovetkezo = p.kovetkezo;
+                    }
+                }
+                else
+                {
+                    elozoElem = p;
+                }
+                p = p.kovetkezo;
+            }
+            return lista;
+        }
+
+        private LancoltLista KitorolID(int ID, LancoltLista lista)
+        {
+            ListaElem elozoElem = null, p = lista.fej;
+            while (p != null)
+            {
+                if (p.tartalom.ID == ID)
                 {
                     if (elozoElem == null)
                     {
@@ -112,7 +136,7 @@ namespace Sztf2_nhf
                 if (JoAdat(p, szelesseg, hosszusag, magassag) == false)
                 {
                     OnNemFerBe(p.tartalom.ID);
-                    lista = Kitorol(p, lista); 
+                    lista = KitorolElem(p, lista); 
                     nemFerBeDB++;
                     p = p.kovetkezo;
                 }
@@ -122,6 +146,17 @@ namespace Sztf2_nhf
                     darab++;
                 }
                 
+            }
+            return lista;
+        }
+
+        public LancoltLista ReID(LancoltLista lista,int darabJo)
+        {
+            ListaElem p = fej;
+            for (int i = 0; i < darabJo; i++)
+            {
+                p.tartalom.ID = i;
+                p = p.kovetkezo;
             }
             return lista;
         }
@@ -142,6 +177,12 @@ namespace Sztf2_nhf
         {
             if (NemFerBeAlap != null)
                 NemFerBeAlap(this, new ButorEventArgs() { SorozatSzam = sorozatszam});
+        }
+
+        public LancoltLista KitorolListabol(int ID, LancoltLista lista)
+        {
+            KitorolID(ID, lista);
+            return lista;
         }
     }
 }

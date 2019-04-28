@@ -13,17 +13,20 @@ namespace Sztf2_nhf
             return true;
         }
 
-        static bool Fk(ref int[,] E, LancoltLista lista, int darab, Raktar raktar)
+        static bool Fk(ref int[,] E, LancoltLista lista, int darab, Raktar raktar,ref string seged,ref ButorAlap elem)
         {
-            ButorAlap elem = lista.NElem(darab);
-            string hely = raktar.getHely(ref E,elem);
-            if (hely == "nincs hely")
+            Console.WriteLine("123");
+            elem = lista.NElem(darab);
+            seged = raktar.getHely(ref E,elem);
+            if (seged == "nincs hely")
             {
-                throw new NincsTobbHelyButornakTeljesRendezesUtanException();
+                lista.KitorolListabol(elem.ID, lista);
+                throw new NincsTobbHelyButornakTeljesRendezesUtanException()
+                {
+                    HibaUzenet = "Nincs hely a raktarban a jelenlegi butor elhelyezesehez",
+                    elem = elem
+                };
             }
-            for (int i = 0; i < szint; i++)  // szint fontos, hogy csak eddig nézzük az eredményeket is
-                if (eredmenyek[i] == ember)
-                    return false;
             return true;
         }
 
@@ -35,13 +38,23 @@ namespace Sztf2_nhf
                 i++;
                 if (Ft(darab, lista))
                 {
-                    if (Fk(ref E, lista, darab, raktar))//belép hogy megnézzr van-e hely a bútornak
+                    string seged = "";
+                    ButorAlap elemSeged = new AlloButor(0,0,0,-1);
+                    if (Fk(ref E, lista, darab, raktar,ref seged, ref elemSeged))
                     {
-                        E[szint] = R[szint, i]; //beteszi a bútort
-                        if (szint == darab)
+                        int szelesStart = int.Parse(seged.Split()[0]);
+                        int hosszStart = int.Parse(seged.Split()[1]);
+                        for (int j = hosszStart; j < hosszStart + elemSeged.Hosszusag; j++)
+                        {
+                            for (int k = szelesStart; k < szelesStart + elemSeged.Szelesseg; k++)
+                            {
+                                E[j, k] = elemSeged.ID;
+                            }
+                        }
+                        if (raktar.ButorDarab == darab)
                             van = true;
                         else
-                            Rendezes(darab + 1, ref E, ref van, lista);
+                            Rendezes(darab + 1, ref E, ref van, lista, raktar);
                     }
                 }
             }

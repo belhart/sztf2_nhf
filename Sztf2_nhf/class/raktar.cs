@@ -31,7 +31,7 @@ namespace Sztf2_nhf
             int darabseged = 0;
             lista = lista.ListaFeldolgozas(lista, Szelesseg, Hosszusag, Magassag, ref darabseged);
             ButorDarab = darabseged;
-            Console.WriteLine(ButorDarab);
+            lista = lista.ReID(lista,darabseged);
         }
 
         public void OsszesButorElhelyezeseARaktarban()
