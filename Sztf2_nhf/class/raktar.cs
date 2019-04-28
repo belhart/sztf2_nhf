@@ -37,19 +37,20 @@ namespace Sztf2_nhf
         public void OsszesButorElhelyezeseARaktarban()
         {
             bool osszes = false;
+            int butorDarabSeged = ButorDarab;
             int[,] raktarButorokkalseged = raktarButorokkal;
-            BTS.Rendezes(ButorDarab,ref raktarButorokkalseged, ref osszes,lista, this);
+            BTS.Rendezes(0,ref raktarButorokkalseged, ref osszes,lista, this, butorDarabSeged);
         }
         
         public string getHely(ref int[,] E, ButorAlap elem)
         {
-            for (int i = 0; i < E.GetLength(0); i++)
+            for (int i = 0; i < E.GetLength(0) - elem.Hosszusag; i++)
             {
-                for (int j = 0; j < E.GetLength(1); j++)
+                for (int j = 0; j < E.GetLength(1) - elem.Szelesseg; j++)
                 {
                     if (E[i,j] == 0)
                     {
-                        bool joHely = HelyEllenorzes(ref E, i, j);
+                        bool joHely = HelyEllenorzes(ref E, i, j, elem.Szelesseg,elem.Hosszusag);
                         if (joHely == true)
                         {
                             return i.ToString()+" "+j.ToString();
@@ -60,11 +61,15 @@ namespace Sztf2_nhf
             return "nincs hely";
         }
 
-        private bool HelyEllenorzes(ref int[,] E, int szel, int hossz)
+        private bool HelyEllenorzes(ref int[,] E, int szel, int hossz, double elemSzel, double elemHossz)
         {
-            for (int i = 0; i < szel; i++)
+            if (E.GetLength(0) - szel - elemSzel < 0)
+                return false;
+            if (E.GetLength(1) - hossz - elemHossz < 0)
+                return false;
+            for (int i = szel; i < szel + elemSzel; i++)
             {
-                for (int j = 0; j < hossz; j++)
+                for (int j = hossz; j < hossz + elemHossz; j++)
                 {
                     if (E[i, j] != 0)
                         return false;

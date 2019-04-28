@@ -46,17 +46,17 @@ namespace Sztf2_nhf
             }     
         }
 
-        public ButorAlap NElem(int i)
+        public ButorAlap IDthElem(int i)
         {
             ListaElem p = fej;
             int n = 0;
             while (p != null)
             {
-                if (n == i)
+                if (p.tartalom.ID == i+1)
                     return p.tartalom;
                 else
                 {
-                    i++;
+                    n++;
                     p = p.kovetkezo;
                 }
             }
@@ -112,10 +112,12 @@ namespace Sztf2_nhf
                     if (elozoElem == null)
                     {
                         lista.fej.kovetkezo = p.kovetkezo;
+                        return lista;
                     }
                     else
                     {
                         elozoElem.kovetkezo = p.kovetkezo;
+                        return lista;
                     }
                 }
                 else
@@ -155,7 +157,7 @@ namespace Sztf2_nhf
             ListaElem p = fej;
             for (int i = 0; i < darabJo; i++)
             {
-                p.tartalom.ID = i;
+                p.tartalom.ID = i+1;
                 p = p.kovetkezo;
             }
             return lista;

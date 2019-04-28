@@ -15,7 +15,7 @@ namespace Sztf2_nhf
 
         static void Main(string[] args)
         {
-            Raktar raktar = new Raktar(600,3600,45);
+            Raktar raktar = new Raktar(50,50,45);
             raktar.lista.NemFerBeAlap += OnNemFerBeAlap;
             Console.WriteLine("Az adatok beolvasasa közbeni problémák:");
             raktar.AdatHelyessegEllenorzes();
@@ -42,6 +42,7 @@ namespace Sztf2_nhf
                     case "2":
                         Console.Clear();
                         Console.Write("Kihozni kivant butor ID-je");
+                        BTS.RaktarGrafKiir(raktar.raktarButorokkal);
                         int kihozButorId = int.Parse(Console.ReadLine());
                         break;
                     case "3":

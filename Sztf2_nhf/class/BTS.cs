@@ -16,7 +16,7 @@ namespace Sztf2_nhf
         static bool Fk(ref int[,] E, LancoltLista lista, int darab, Raktar raktar,ref string seged,ref ButorAlap elem)
         {
             Console.WriteLine("123");
-            elem = lista.NElem(darab);
+            elem = lista.IDthElem(darab);
             seged = raktar.getHely(ref E,elem);
             if (seged == "nincs hely")
             {
@@ -30,33 +30,64 @@ namespace Sztf2_nhf
             return true;
         }
 
-        public static void Rendezes(int darab, ref int[,] E, ref bool van, LancoltLista lista, Raktar raktar)
+        public static void Rendezes(int darab, ref int[,] E, ref bool van, LancoltLista lista, Raktar raktar, int Osszdarab)
         {
             int i = -1;
-            while (!van && i < 2)
+            while (!van && i < 0)
             {
                 i++;
                 if (Ft(darab, lista))
                 {
                     string seged = "";
                     ButorAlap elemSeged = new AlloButor(0,0,0,-1);
-                    if (Fk(ref E, lista, darab, raktar,ref seged, ref elemSeged))
+                    try
                     {
-                        int szelesStart = int.Parse(seged.Split()[0]);
-                        int hosszStart = int.Parse(seged.Split()[1]);
-                        for (int j = hosszStart; j < hosszStart + elemSeged.Hosszusag; j++)
+                        if (Fk(ref E, lista, darab, raktar, ref seged, ref elemSeged))
                         {
-                            for (int k = szelesStart; k < szelesStart + elemSeged.Szelesseg; k++)
+                            int szelesStart = int.Parse(seged.Split()[1]);
+                            int hosszStart = int.Parse(seged.Split()[0]);
+                            for (int j = hosszStart; j < hosszStart + elemSeged.Szelesseg; j++)
                             {
-                                E[j, k] = elemSeged.ID;
+                                for (int k = szelesStart; k < szelesStart + elemSeged.Hosszusag; k++)
+                                {
+                                    E[j, k] = elemSeged.ID;
+                                }
                             }
+                            //RaktarGrafKiir(E);
+                            if (Osszdarab == darab)
+                                van = true;
+                            else
+                                Rendezes(darab + 1, ref E, ref van, lista, raktar, Osszdarab);
                         }
-                        if (raktar.ButorDarab == darab)
-                            van = true;
-                        else
-                            Rendezes(darab + 1, ref E, ref van, lista, raktar);
+                    }
+                    catch (NincsTobbHelyButornakTeljesRendezesUtanException)
+                    {
+                        //OnNemFerBe(elemSeged.ID);
+                        Console.WriteLine("NEMFERBEEXCEPTIONIDE");
+                        if (darab > Osszdarab)
+                        {
+                            return;
+                        }
+                        Rendezes(darab + 1, ref E, ref van, lista, raktar, Osszdarab-1);
+                    }
+                    catch (Exception)
+                    {
+                        //log
                     }
                 }
+            }
+        }
+
+        public static void RaktarGrafKiir(int[,] E)
+        {
+            Console.Clear();
+            for (int i = 0; i < E.GetLength(0); i++)
+            {
+                for (int j = 0; j < E.GetLength(1); j++)
+                {
+                    Console.Write(E[i,j]);
+                }
+                Console.WriteLine();
             }
         }
 
