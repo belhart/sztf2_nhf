@@ -6,9 +6,9 @@ namespace Sztf2_nhf
 {
     interface IMeret
     {
-        double Szelesseg { get; set; }
-        double Magassag { get; set; }
-        double Hosszusag { get; set; }
+        int Szelesseg { get; set; }
+        int Magassag { get; set; }
+        int Hosszusag { get; set; }
 
     }
 }

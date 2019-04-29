@@ -52,7 +52,7 @@ namespace Sztf2_nhf
             int n = 0;
             while (p != null)
             {
-                if (p.tartalom.ID == i+1)
+                if (p.tartalom.ID == i)
                     return p.tartalom;
                 else
                 {
@@ -62,6 +62,8 @@ namespace Sztf2_nhf
             }
             return null;
         }
+
+        
 
         public void Bejaras()
         {

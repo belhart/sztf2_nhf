@@ -16,7 +16,7 @@ namespace Sztf2_nhf
         static bool Fk(ref int[,] E, LancoltLista lista, int darab, Raktar raktar,ref string seged,ref ButorAlap elem)
         {
             Console.WriteLine("123");
-            elem = lista.IDthElem(darab);
+            elem = lista.IDthElem(darab+1);
             seged = raktar.getHely(ref E,elem);
             if (seged == "nincs hely")
             {
@@ -46,6 +46,7 @@ namespace Sztf2_nhf
                         {
                             int szelesStart = int.Parse(seged.Split()[1]);
                             int hosszStart = int.Parse(seged.Split()[0]);
+                            elemSeged.BalFelsoKoordinata = seged;
                             for (int j = hosszStart; j < hosszStart + elemSeged.Szelesseg; j++)
                             {
                                 for (int k = szelesStart; k < szelesStart + elemSeged.Hosszusag; k++)
@@ -78,9 +79,17 @@ namespace Sztf2_nhf
             }
         }
 
-        public static void Kihoz()
+        public static void Kihoz(int ID, Raktar raktar) 
         {
-
+            string utbanVanID = "";
+            ButorAlap elem = raktar.lista.IDthElem(ID);
+            int balAlsoSzel = int.Parse(elem.BalFelsoKoordinata.Split()[0]) + elem.Hosszusag;
+            for (int i = balAlsoSzel; i < elem.Szelesseg+ balAlsoSzel; i++)
+            {
+                if (raktar.raktarButorokkal[i, int.Parse(elem.BalFelsoKoordinata.Split()[1])] != elem.ID && raktar.raktarButorokkal[i, int.Parse(elem.BalFelsoKoordinata.Split()[1])] != 0)
+                    utbanVanID += raktar.raktarButorokkal[i, int.Parse(elem.BalFelsoKoordinata.Split()[1])].ToString() + " ";
+            }
+            Console.WriteLine(utbanVanID);
         }
 
 

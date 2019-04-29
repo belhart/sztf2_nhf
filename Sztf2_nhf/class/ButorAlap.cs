@@ -6,10 +6,11 @@ namespace Sztf2_nhf
 {
     abstract class ButorAlap : IMeret
     {
-        public double Szelesseg { get; set; }
-        public double Magassag { get; set; }
-        public double Hosszusag { get; set; }
+        public int Szelesseg { get; set; }
+        public int Magassag { get; set; }
+        public int Hosszusag { get; set; }
         public int ID { get; set; }
+        public string BalFelsoKoordinata { get; set; }
 
         public ButorAlap(int szel, int magas, int hossz, int ID)
         {
