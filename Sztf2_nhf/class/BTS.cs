@@ -16,7 +16,7 @@ namespace Sztf2_nhf
         static bool Fk(ref int[,] E, LancoltLista lista, int darab, Raktar raktar,ref string seged,ref ButorAlap elem)
         {
             Console.WriteLine("123");
-            elem = lista.IDthElem(darab+1);
+            elem = lista.IDthElem(darab);
             seged = raktar.getHely(ref E,elem);
             if (seged == "nincs hely")
             {
@@ -42,10 +42,12 @@ namespace Sztf2_nhf
                     ButorAlap elemSeged = new AlloButor(0,0,0,-1);
                     try
                     {
-                        if (Fk(ref E, lista, darab, raktar, ref seged, ref elemSeged))
+                        if (Fk(ref E, lista, darab+1, raktar, ref seged, ref elemSeged))
                         {
                             int szelesStart = int.Parse(seged.Split()[1]);
                             int hosszStart = int.Parse(seged.Split()[0]);
+                            if (elemSeged.ID == 8)
+                                ;
                             elemSeged.BalFelsoKoordinata = seged;
                             for (int j = hosszStart; j < hosszStart + elemSeged.Szelesseg; j++)
                             {
@@ -54,7 +56,7 @@ namespace Sztf2_nhf
                                     E[j, k] = elemSeged.ID;
                                 }
                             }
-                            if (Osszdarab == darab)
+                            if (raktar.ButorDarab == darab+1)
                                 van = true;
                             else
                                 Rendezes(darab + 1, ref E, ref van, lista, raktar, Osszdarab);
@@ -65,7 +67,7 @@ namespace Sztf2_nhf
                         //OnNemFerBe(elemSeged.ID);
                         //Forgatasal elfer?
                         Console.WriteLine("NEMFERBEEXCEPTIONIDE");
-                        if (darab > Osszdarab)
+                        if (darab+1 == raktar.ButorDarab)
                         {
                             return;
                         }
@@ -83,8 +85,9 @@ namespace Sztf2_nhf
         {
             string utbanVanID = "";
             ButorAlap elem = raktar.lista.IDthElem(ID);
-            int balAlsoSzel = int.Parse(elem.BalFelsoKoordinata.Split()[0]) + elem.Hosszusag;
-            for (int i = balAlsoSzel; i < elem.Szelesseg+ balAlsoSzel; i++)
+            Console.WriteLine(elem.BalFelsoKoordinata);
+            int balAlsoSzel = int.Parse(elem.BalFelsoKoordinata.Split()[1]);
+            for (int i = balAlsoSzel; i < elem.Hosszusag + balAlsoSzel+1; i++)
             {
                 if (raktar.raktarButorokkal[i, int.Parse(elem.BalFelsoKoordinata.Split()[1])] != elem.ID && raktar.raktarButorokkal[i, int.Parse(elem.BalFelsoKoordinata.Split()[1])] != 0)
                     utbanVanID += raktar.raktarButorokkal[i, int.Parse(elem.BalFelsoKoordinata.Split()[1])].ToString() + " ";
