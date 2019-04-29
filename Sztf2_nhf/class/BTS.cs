@@ -86,10 +86,10 @@ namespace Sztf2_nhf
             string utbanVanID = "";
             ButorAlap elem = raktar.lista.IDthElem(ID);
             Console.WriteLine(elem.BalFelsoKoordinata);
-            int balAlsoSzel = int.Parse(elem.BalFelsoKoordinata.Split()[1]);
+            int balAlsoSzel = int.Parse(elem.BalFelsoKoordinata.Split()[1]); //0 30
             for (int i = balAlsoSzel; i < elem.Hosszusag + balAlsoSzel+1; i++)
             {
-                if (raktar.raktarButorokkal[i, int.Parse(elem.BalFelsoKoordinata.Split()[1])] != elem.ID && raktar.raktarButorokkal[i, int.Parse(elem.BalFelsoKoordinata.Split()[1])] != 0)
+                if (raktar.raktarButorokkal[int.Parse(elem.BalFelsoKoordinata.Split()[0])+ elem.Szelesseg , i] != elem.ID && raktar.raktarButorokkal[i, int.Parse(elem.BalFelsoKoordinata.Split()[1])] != 0)
                     utbanVanID += raktar.raktarButorokkal[i, int.Parse(elem.BalFelsoKoordinata.Split()[1])].ToString() + " ";
             }
             Console.WriteLine(utbanVanID);
