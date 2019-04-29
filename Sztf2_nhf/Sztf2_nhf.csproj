@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="class\BTS - Copy.cs" />
     <Compile Include="class\BTS.cs" />
     <Compile Include="class\ButorEventArgs.cs" />
     <Compile Include="class\AlapException.cs" />

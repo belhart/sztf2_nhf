@@ -42,10 +42,9 @@ namespace Sztf2_nhf
                     case "2":
                         Console.Clear();
                         Console.Write("Kihozni kivant butor ID-je");
-                        BTS.RaktarGrafKiir(raktar.raktarButorokkal);
+                        raktar.RaktarGrafKiir();
                         int kihozButorId = int.Parse(Console.ReadLine());
-                        BTS.Kihoz(kihozButorId, raktar);
-                        
+                        //BTS.Kihoz(kihozButorId, raktar);
                         Console.ReadLine();
                         break;
                     case "3":
