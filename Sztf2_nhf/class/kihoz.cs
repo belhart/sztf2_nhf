@@ -21,15 +21,17 @@ namespace Sztf2_nhf
 
         private static void Utbanvan(ref int[] lista, ButorAlap elem, Raktar raktar)
         {
-            int balalsoKoordinata = int.Parse(elem.BalFelsoKoordinata.Split()[0]) - elem.Hosszusag;
+            int balalsoKoordinata = int.Parse(elem.BalFelsoKoordinata.Split()[0]) + elem.Hosszusag + 1;
+            int bal = int.Parse(elem.BalFelsoKoordinata.Split()[1]);
+            int jobb = bal + elem.Szelesseg;
             int db = 0;
-            for (int i = balalsoKoordinata; i < raktar.raktarButorokkal.GetLength(1); i++)
+            for (int i = bal; i < jobb; i++)//i,j-t felcserélni hogy hatékonyabb legyen
             {
-                for (int j = int.Parse(elem.BalFelsoKoordinata.Split()[1]); j < elem.Szelesseg; j++)
+                for (int j = balalsoKoordinata; j < raktar.raktarButorokkal.GetLength(1); j++)
                 {
-                    if (!lista.Contains(raktar.raktarButorokkal[i,j]))
+                    if (!lista.Contains(raktar.raktarButorokkal[i,j]) && raktar.raktarButorokkal[i, j] != elem.ID)
                     {
-                        lista[db] = raktar.raktarButorokkal[i, j];
+                        lista[db++] = raktar.raktarButorokkal[i, j];
                     }
                 }
             }
