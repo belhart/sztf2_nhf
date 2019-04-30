@@ -46,9 +46,9 @@ namespace Sztf2_nhf
                 R[i, 0] = true;
                 R[i, 1] = false;
             }
-            bool[] E = new bool[Szelesseg];
+            bool[] E = new bool[ButorDarab];
             BTS2.BTS(0,ref E, R,ref van, this);
-            Console.WriteLine("\n\nBefer-e(true/false) + annak a butornak az adatja ");
+            Console.WriteLine("\n\nBefer-e(true/false) + annak a butornak az adatai");
             for (int i = 0; i < ButorDarab; i++)
             {
                 Console.Write(E[i] + " ");
@@ -100,11 +100,6 @@ namespace Sztf2_nhf
 
         private void Elemelhelyez(ButorAlap elem, int szel, int hossz)
         {
-            //RaktarGrafKiir();
-            if (elem.ID == 4)
-            {
-                ;
-            }
             for (int j = hossz; j < hossz + elem.Szelesseg; j++)
             {
                 for (int k = szel; k < szel+ elem.Hosszusag; k++)
@@ -113,6 +108,21 @@ namespace Sztf2_nhf
                     raktarButorokkal[k, j] = elem.ID;
                 }
             }
+        }
+
+        public void ElemKivetel(int ID)
+        {
+            ButorAlap elem = lista.IDthElem(ID);
+            int bal = int.Parse(elem.BalFelsoKoordinata.Split()[0]);
+            int jobb = int.Parse(elem.BalFelsoKoordinata.Split()[1]);
+            for (int i = bal; i < bal + elem.Hosszusag; i++)
+            {
+                for (int j = jobb; j < jobb + elem.Szelesseg; j++)
+                {
+                    raktarButorokkal[i, j] = 0;
+                }
+            }
+            elem.BalFelsoKoordinata = "";
         }
 
         private bool HelyEllenorzes(int szel, int hossz, double elemSzel, double elemHossz)

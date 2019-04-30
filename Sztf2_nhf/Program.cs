@@ -46,6 +46,7 @@ namespace Sztf2_nhf
                         int kihozButorId = int.Parse(Console.ReadLine());
                         kihoz.ButorKihozatal(kihozButorId, raktar);
                         //BTS.Kihoz(kihozButorId, raktar);
+                        raktar.RaktarGrafKiir();
                         Console.ReadLine();
                         break;
                     case "3":

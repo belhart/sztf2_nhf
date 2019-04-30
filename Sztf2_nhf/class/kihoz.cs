@@ -17,6 +17,16 @@ namespace Sztf2_nhf
             {
                 Console.WriteLine(UtbanVanIDk[i]);
             }
+            LancoltLista kihozottButorokLista = new LancoltLista();
+            int j = 0;
+            while (j<raktar.ButorDarab && UtbanVanIDk[j] != 0)
+            {
+                kihozottButorokLista.VegereBeszuras(raktar.lista.IDthElem(UtbanVanIDk[j]));
+                raktar.ElemKivetel(UtbanVanIDk[j++]);
+            }
+            raktar.ElemKivetel(ID);
+            bool[] OPT = new bool[raktar.ButorDarab];
+            raktar.lista.KitorolListabol(ID, raktar.lista);
         }
 
         private static void Utbanvan(ref int[] lista, ButorAlap elem, Raktar raktar)
