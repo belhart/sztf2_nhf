@@ -20,7 +20,7 @@ namespace Sztf2_nhf
                 return true;
             }
             bool seged;
-            seged = raktar.getHely(raktar.lista.IDthElem(szint+1));
+            seged = raktar.getHely(raktar.lista.IDthElem(szint + 1), true);
             return seged;
         }
 

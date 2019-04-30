@@ -77,7 +77,7 @@ namespace Sztf2_nhf
             return "nincs hely";
         }*/
 
-        public bool getHely(ButorAlap elem)
+        public bool getHely(ButorAlap elem, bool elhelyez)
         {
             for (int i = 0; i < raktarButorokkal.GetLength(0) - elem.Hosszusag; i++)
             {
@@ -88,8 +88,11 @@ namespace Sztf2_nhf
                         bool joHely = HelyEllenorzes(i, j, elem.Szelesseg, elem.Hosszusag);
                         if (joHely == true)
                         {
-                            Elemelhelyez(elem, i, j);
-                            elem.BalFelsoKoordinata = i.ToString() + " " + j.ToString();
+                            if (elhelyez)
+                            {
+                                Elemelhelyez(elem, i, j);
+                                elem.BalFelsoKoordinata = i.ToString() + " " + j.ToString();
+                            }
                             return true;
                         }
                     }
@@ -140,6 +143,47 @@ namespace Sztf2_nhf
                 }
             }
             return true;
+        }
+
+        public void ButorKihozatal(int ID, Raktar raktar)
+        {
+            ButorAlap elem = raktar.lista.IDthElem(ID);
+            int[] UtbanVanIDk = new int[raktar.ButorDarab - 1];
+            Utbanvan(ref UtbanVanIDk, elem, raktar);
+            for (int i = 0; i < raktar.ButorDarab - 1; i++)
+            {
+                Console.WriteLine(UtbanVanIDk[i]);
+            }
+            LancoltLista kihozottButorokLista = new LancoltLista();
+            int j = 0;
+            while (j < raktar.ButorDarab && UtbanVanIDk[j] != 0)
+            {
+                kihozottButorokLista.VegereBeszuras(raktar.lista.IDthElem(UtbanVanIDk[j]));
+                raktar.ElemKivetel(UtbanVanIDk[j++]);
+            }
+            raktar.ElemKivetel(ID);
+            raktar.lista.KitorolListabol(ID, raktar.lista);
+            bool[] OPT = new bool[raktar.ButorDarab];
+            bool[] E = new bool[ButorDarab];
+            OptimBTS.OPTIMBTS(0,)
+        }
+
+        private void Utbanvan(ref int[] lista, ButorAlap elem, Raktar raktar)
+        {
+            int balalsoKoordinata = int.Parse(elem.BalFelsoKoordinata.Split()[0]) + elem.Hosszusag + 1;
+            int bal = int.Parse(elem.BalFelsoKoordinata.Split()[1]);
+            int jobb = bal + elem.Szelesseg;
+            int db = 0;
+            for (int i = bal; i < jobb; i++)//i,j-t felcserélni hogy hatékonyabb legyen
+            {
+                for (int j = balalsoKoordinata; j < raktar.raktarButorokkal.GetLength(1); j++)
+                {
+                    if (!lista.Contains(raktar.raktarButorokkal[i, j]) && raktar.raktarButorokkal[i, j] != elem.ID)
+                    {
+                        lista[db++] = raktar.raktarButorokkal[i, j];
+                    }
+                }
+            }
         }
 
         public void RaktarGrafKiir()

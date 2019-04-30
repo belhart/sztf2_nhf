@@ -20,11 +20,11 @@ namespace Sztf2_nhf
                 return true;
             }
             bool seged;
-            seged = raktar.getHely(raktar.lista.IDthElem(szint + 1));
+            seged = raktar.getHely(raktar.lista.IDthElem(szint + 1), false);
             return seged;
         }
 
-        public static void BTS(int szint, ref bool[] E, bool[,] R, ref bool van, Raktar raktar)
+        public static void OPTIMBTS(int szint, ref bool[] E, bool[,] R, ref bool van, Raktar raktar, ref bool[] OPT)
         {
             int i = -1;
             while (i < 2)
@@ -37,17 +37,28 @@ namespace Sztf2_nhf
                         E[szint] = R[szint, i];
                         if (szint == raktar.ButorDarab - 1)
                         {
-                            if (!van)
+                            if (!van || Josag(E) > Josag(OPT))
                             {
-                                ;
+                                OPT = E;
                             }
                             van = true;
                         }
                         else
-                            BTS(szint + 1, ref E, R, ref van, raktar);
+                            OPTIMBTS(szint + 1, ref E, R, ref van, raktar,ref OPT);
                     }
                 }
             }
+        }
+
+        private static int Josag(bool[] E)
+        {
+            int dbTrue = 0;
+            for (int i = 0; i < E.Length; i++)
+            {
+                if (E[i] == true)
+                    dbTrue++;
+            }
+            return dbTrue;
         }
     }
 }

@@ -165,6 +165,18 @@ namespace Sztf2_nhf
             return lista;
         }
 
+        public int DarabElem(LancoltLista lista)
+        {
+            ListaElem p = fej;
+            int db = 0;
+            while (p != null)
+            {
+                db++;
+                p = p.kovetkezo;
+            }
+            return db;
+        }
+
         private bool JoAdat(ListaElem elem, int szelesseg, int hosszusag, int magassag)
         {
             if (elem.tartalom.Hosszusag > hosszusag)
