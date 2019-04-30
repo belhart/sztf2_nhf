@@ -19,7 +19,7 @@ namespace Sztf2_nhf
             {
                 return true;
             }
-            bool seged;//mássá alakítás
+            bool seged;
             seged = raktar.getHely(raktar.lista.IDthElem(szint+1));
             return seged;
         }
