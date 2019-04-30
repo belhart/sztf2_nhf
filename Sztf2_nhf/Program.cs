@@ -44,6 +44,7 @@ namespace Sztf2_nhf
                         Console.Write("Kihozni kivant butor ID-je");
                         raktar.RaktarGrafKiir();
                         int kihozButorId = int.Parse(Console.ReadLine());
+                        kihoz.ButorKihozatal(kihozButorId, raktar);
                         //BTS.Kihoz(kihozButorId, raktar);
                         Console.ReadLine();
                         break;

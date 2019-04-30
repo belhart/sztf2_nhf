@@ -19,12 +19,9 @@ namespace Sztf2_nhf
             {
                 return true;
             }
-            string seged = "";//mássá alakítás
+            bool seged;//mássá alakítás
             seged = raktar.getHely(raktar.lista.IDthElem(szint+1));
-            if (seged == "nincs hely")
-                return false;
-            return true;
-
+            return seged;
         }
 
         public static void BTS(int szint, ref bool[] E, bool[,] R, ref bool van, Raktar raktar)

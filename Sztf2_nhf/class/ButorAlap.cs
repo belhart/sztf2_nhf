@@ -23,7 +23,8 @@ namespace Sztf2_nhf
 
         public override bool Equals(object obj)
         {
-            return (obj as ButorAlap).Szelesseg.Equals(this.Szelesseg) && (obj as ButorAlap).Hosszusag.Equals(this.Hosszusag) && (obj as ButorAlap).Magassag.Equals(this.Magassag);
+            return (obj as ButorAlap).ID.Equals(this.ID);
+            //return (obj as ButorAlap).Szelesseg.Equals(this.Szelesseg) && (obj as ButorAlap).Hosszusag.Equals(this.Hosszusag) && (obj as ButorAlap).Magassag.Equals(this.Magassag);
         }
     }
 }

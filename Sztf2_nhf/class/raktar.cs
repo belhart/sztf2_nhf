@@ -77,7 +77,7 @@ namespace Sztf2_nhf
             return "nincs hely";
         }*/
 
-        public string getHely(ButorAlap elem)
+        public bool getHely(ButorAlap elem)
         {
             for (int i = 0; i < raktarButorokkal.GetLength(0) - elem.Hosszusag; i++)
             {
@@ -89,12 +89,13 @@ namespace Sztf2_nhf
                         if (joHely == true)
                         {
                             Elemelhelyez(elem, i, j);
-                            return i.ToString() + " " + j.ToString();
+                            elem.BalFelsoKoordinata = i.ToString() + " " + j.ToString();
+                            return true;
                         }
                     }
                 }
             }
-            return "nincs hely";
+            return false;
         }
 
         private void Elemelhelyez(ButorAlap elem, int szel, int hossz)
