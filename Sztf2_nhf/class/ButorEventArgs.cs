@@ -9,5 +9,6 @@ namespace Sztf2_nhf
     class ButorEventArgs : EventArgs
     {
         public int SorozatSzam { get; set; }
+        public string BalfFelsoKoordinata { get; set; }
     }
 }

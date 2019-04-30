@@ -13,38 +13,45 @@ namespace Sztf2_nhf
             return true;
         }
 
-        static bool Fk(int szint, bool r, Raktar raktar, bool[] E)
+        static bool Fk(int szint, bool r, Raktar raktar, bool[] E, LancoltLista lista)
         {
             if (r == false)
             {
                 return true;
             }
             bool seged;
-            seged = raktar.getHely(raktar.lista.IDthElem(szint + 1), false);
+            seged = raktar.getHely(lista.NthElem(szint), false);
             return seged;
         }
 
-        public static void OPTIMBTS(int szint, ref bool[] E, bool[,] R, ref bool van, Raktar raktar, ref bool[] OPT)
+        public static void OPTIMBTS(int szint, ref bool[] E, bool[,] R, ref bool van, Raktar raktar, ref bool[] OPT,LancoltLista lista)
         {
             int i = -1;
-            while (i < 2)
+            while (i < 1)
             {
+                if (szint == lista.DarabElem(lista) - 1)
+                {
+                    ;
+                }
                 i++;
                 if (Ft(szint, R[szint, i], raktar, E))
                 {
-                    if (Fk(szint, R[szint, i], raktar, E))
+                    if (Fk(szint, R[szint, i], raktar, E,lista))
                     {
                         E[szint] = R[szint, i];
-                        if (szint == raktar.ButorDarab - 1)
+                        if (szint == lista.DarabElem(lista)-1)
                         {
-                            if (!van || Josag(E) > Josag(OPT))
+                            if (!van || (Josag(E) > Josag(OPT)))
                             {
-                                OPT = E;
+                                for (int j = 0; j < E.Length; j++)
+                                {
+                                    OPT[j] = E[j];
+                                }
                             }
                             van = true;
                         }
                         else
-                            OPTIMBTS(szint + 1, ref E, R, ref van, raktar,ref OPT);
+                            OPTIMBTS(szint + 1, ref E, R, ref van, raktar,ref OPT, lista);
                     }
                 }
             }

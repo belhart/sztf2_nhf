@@ -63,7 +63,22 @@ namespace Sztf2_nhf
             return null;
         }
 
-        
+        public ButorAlap NthElem(int i)
+        {
+            ListaElem p = fej;
+            int n = 0;
+            while (p != null)
+            {
+                if (n == i)
+                    return p.tartalom;
+                else
+                {
+                    n++;
+                    p = p.kovetkezo;
+                }
+            }
+            return null;
+        }
 
         public void Bejaras()
         {

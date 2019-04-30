@@ -36,12 +36,11 @@ namespace Sztf2_nhf
 
         public void OsszesButorElhelyezeseARaktarban()
         {
-            bool osszes = false;
             bool van = false;
             int butorDarabSeged = ButorDarab;
             int[,] raktarButorokkalseged = raktarButorokkal;
-            bool[,] R = new bool[Szelesseg, 2];
-            for (int i = 0; i < Szelesseg; i++)
+            bool[,] R = new bool[ButorDarab, 2];
+            for (int i = 0; i < ButorDarab; i++)
             {
                 R[i, 0] = true;
                 R[i, 1] = false;
@@ -150,10 +149,6 @@ namespace Sztf2_nhf
             ButorAlap elem = raktar.lista.IDthElem(ID);
             int[] UtbanVanIDk = new int[raktar.ButorDarab - 1];
             Utbanvan(ref UtbanVanIDk, elem, raktar);
-            for (int i = 0; i < raktar.ButorDarab - 1; i++)
-            {
-                Console.WriteLine(UtbanVanIDk[i]);
-            }
             LancoltLista kihozottButorokLista = new LancoltLista();
             int j = 0;
             while (j < raktar.ButorDarab && UtbanVanIDk[j] != 0)
@@ -163,9 +158,32 @@ namespace Sztf2_nhf
             }
             raktar.ElemKivetel(ID);
             raktar.lista.KitorolListabol(ID, raktar.lista);
-            bool[] OPT = new bool[raktar.ButorDarab];
-            bool[] E = new bool[ButorDarab];
-            OptimBTS.OPTIMBTS(0,)
+            int kihozottDb = kihozottButorokLista.DarabElem(kihozottButorokLista);
+            if (kihozottDb != 0)
+            {
+                bool[] OPT = new bool[kihozottDb];
+                bool[] E = new bool[kihozottDb];
+                bool[,] R = new bool[kihozottDb, 2];
+                for (int i = 0; i < kihozottDb; i++)
+                {
+                    R[i, 0] = true;
+                    R[i, 1] = false;
+                }
+                bool van = false;
+                OptimBTS.OPTIMBTS(0, ref E, R, ref van, this, ref OPT, kihozottButorokLista);
+                for (int i = 0; i < kihozottDb; i++)
+                {
+                    if (OPT[i])
+                    {
+                        getHely(kihozottButorokLista.NthElem(i), true); // visszarakas a raktarba
+                        OnUjHely(kihozottButorokLista.NthElem(i).ID, kihozottButorokLista.NthElem(i).BalFelsoKoordinata);
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
         }
 
         private void Utbanvan(ref int[] lista, ButorAlap elem, Raktar raktar)
@@ -189,14 +207,24 @@ namespace Sztf2_nhf
         public void RaktarGrafKiir()
         {
             Console.Clear();
+            string kiir = "";
             for (int i = 0; i < raktarButorokkal.GetLength(0); i++)
             {
                 for (int j = 0; j < raktarButorokkal.GetLength(1); j++)
                 {
-                    Console.Write(raktarButorokkal[i, j]);
+                    kiir += raktarButorokkal[i, j].ToString();
                 }
-                Console.WriteLine();
+                kiir += "\n";
             }
+            Console.WriteLine(kiir);
+        }
+
+        public delegate void UjHelyEventHandler(object source, ButorEventArgs args);
+        public event UjHelyEventHandler UjHely;
+        protected virtual void OnUjHely(int sorozatszam, string koordinata)
+        {
+            if (UjHely != null)
+                UjHely(this, new ButorEventArgs() { SorozatSzam = sorozatszam , BalfFelsoKoordinata = koordinata});
         }
 
         /*private bool HelyEllenorzes(ref int[,] E,int szel, int hossz, double elemSzel, double elemHossz)

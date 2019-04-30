@@ -13,10 +13,16 @@ namespace Sztf2_nhf
             Console.WriteLine(e.SorozatSzam + ". sorbani butor nem fer be");
         }
 
+        static void OnUjHely(object source, ButorEventArgs e)
+        {
+            Console.WriteLine(e.SorozatSzam + ". ID butor athelyezve, uj balfselso sarok: " + e.BalfFelsoKoordinata);
+        }
+
         static void Main(string[] args)
         {
             Raktar raktar = new Raktar(50,50,45);
             raktar.lista.NemFerBeAlap += OnNemFerBeAlap;
+            raktar.UjHely += OnUjHely;
             Console.WriteLine("Az adatok beolvasasa közbeni problémák:");
             raktar.AdatHelyessegEllenorzes();
             Console.WriteLine("Sikeresen beolvasott butorok");
@@ -45,7 +51,7 @@ namespace Sztf2_nhf
                         raktar.RaktarGrafKiir();
                         int kihozButorId = int.Parse(Console.ReadLine());
                         raktar.ButorKihozatal(kihozButorId, raktar);
-                        raktar.RaktarGrafKiir();
+                        Console.WriteLine("Enter a folytatashoz");
                         Console.ReadLine();
                         break;
                     case "3":
