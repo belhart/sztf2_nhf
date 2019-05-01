@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="class\BTS - Copy.cs" />
     <Compile Include="class\BTS.cs" />
     <Compile Include="class\ButorEventArgs.cs" />
     <Compile Include="class\AlapException.cs" />
@@ -51,14 +50,13 @@
     <Compile Include="class\AlloButor.cs" />
     <Compile Include="class\ButorAlap.cs" />
     <Compile Include="class\AdatBeolvasas.cs" />
-    <Compile Include="class\NemFerBeAlapbolException.cs" />
     <Compile Include="interface\IMeret.cs" />
     <Compile Include="class\NormalButor.cs" />
     <Compile Include="class\LancoltLista.cs" />
     <Compile Include="class\NincsTobbHelyButornakTeljesRendezesElottException.cs" />
     <Compile Include="class\NincsTobbHelyButornakTeljesRendezesUtanException.cs" />
-    <Compile Include="NincsARaktarbanException.cs" />
-    <Compile Include="OptimBTS.cs" />
+    <Compile Include="class\NincsARaktarbanException.cs" />
+    <Compile Include="class\OptimBTS.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="class\Raktar.cs" />

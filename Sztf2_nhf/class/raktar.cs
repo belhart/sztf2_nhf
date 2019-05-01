@@ -46,7 +46,7 @@ namespace Sztf2_nhf
                 R[i, 1] = false;
             }
             bool[] E = new bool[ButorDarab];
-            BTS2.BTS(0,ref E, R,ref van, this);
+            BTSs.BTS(0,ref E, R,ref van, this);
             if (UjraRendezes)
             {
                 Console.WriteLine("\n\nBefer-e(true/false) teljes ujrarendezes utan + annak a butornak az adatai");
@@ -84,27 +84,7 @@ namespace Sztf2_nhf
                     Console.WriteLine(lista.NthElem(i));
                 }
             }
-            //BTS.Rendezes(0,ref raktarButorokkalseged, ref osszes,lista, this, butorDarabSeged);
         }
-        
-        /*public string getHely(ref int[,] E, ButorAlap elem)
-        {
-            for (int i = 0; i < E.GetLength(0) - elem.Hosszusag; i++)
-            {
-                for (int j = 0; j < E.GetLength(1) - elem.Szelesseg; j++)
-                {
-                    if (E[i,j] == 0)
-                    {
-                        bool joHely = HelyEllenorzes(ref E, i, j, elem.Szelesseg,elem.Hosszusag);
-                        if (joHely == true)
-                        {
-                            return i.ToString()+" "+j.ToString();
-                        }
-                    }
-                }
-            }
-            return "nincs hely";
-        }*/
 
         public bool getHely(ButorAlap elem, bool elhelyez)
         {
@@ -314,13 +294,24 @@ namespace Sztf2_nhf
             int bal = int.Parse(elem.BalFelsoKoordinata.Split()[1]);
             int jobb = bal + minimum2;
             int db = 0;
-            for (int i = bal; i < jobb; i++)//i,j-t felcserélni hogy hatékonyabb legyen
+            for (int i = bal; i < jobb; i++)
             {
                 for (int j = balalsoKoordinata; j < raktar.raktarButorokkal.GetLength(1); j++)
                 {
                     if (!lista.Contains(raktar.raktarButorokkal[j, i]) && raktar.raktarButorokkal[j, i] != elem.ID)
                     {
                         lista[db++] = raktar.raktarButorokkal[j, i];
+                    }
+                }
+            }
+            if (elem is AlacsonyButor)
+            {
+                if ((elem as AlacsonyButor).rajtaLevoButorIDk != "")
+                {
+                    int rajtadb = (elem as AlacsonyButor).rajtaLevoButorIDk.Count(Char.IsWhiteSpace) + 1;
+                    for (int i = 0; i < rajtadb; i++)
+                    {
+                        lista[db++] = int.Parse((elem as AlacsonyButor).rajtaLevoButorIDk.Split()[i]);
                     }
                 }
             }
@@ -348,22 +339,5 @@ namespace Sztf2_nhf
             if (UjHely != null)
                 UjHely(this, new ButorEventArgs() { SorozatSzam = sorozatszam , BalfFelsoKoordinata = koordinata});
         }
-
-        /*private bool HelyEllenorzes(ref int[,] E,int szel, int hossz, double elemSzel, double elemHossz)
-        {
-            if (E.GetLength(0) - szel - elemSzel < 0)
-                return false;
-            if (E.GetLength(1) - hossz - elemHossz < 0)
-                return false;
-            for (int i = szel; i < szel + elemSzel; i++)
-            {
-                for (int j = hossz; j < hossz + elemHossz; j++)
-                {
-                    if (E[i, j] != 0)
-                        return false;
-                }
-            }
-            return true;
-        }*/
     }
 }

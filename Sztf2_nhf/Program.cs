@@ -25,7 +25,7 @@ namespace Sztf2_nhf
             raktar.UjHely += OnUjHely;
             Console.WriteLine("Az adatok beolvasasa közbeni problémák:");
             raktar.AdatHelyessegEllenorzes();
-            Console.WriteLine("Sikeresen beolvasott butorok");
+            Console.WriteLine("\n-------------------\nSikeresen beolvasott butorok");
             raktar.lista.Bejaras();
             raktar.OsszesButorElhelyezeseARaktarban(false);
             Console.WriteLine("Enter a folytatashoz");
