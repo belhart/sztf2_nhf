@@ -129,7 +129,7 @@ namespace Sztf2_nhf
                 {
                     if (raktarButorokkal[i, j] == 0)
                     {
-                        bool joHely = HelyEllenorzes(i, j, meddig1, meddig2);
+                        bool joHely = HelyEllenorzes(i, j, meddig1, meddig2,0);
                         if (joHely == true)
                         {
                             if (elhelyez)
@@ -143,7 +143,45 @@ namespace Sztf2_nhf
                     if (lista.IDthElem(raktarButorokkal[i, j]) is AlacsonyButor)
                     {
                         ButorAlap elemseged = lista.IDthElem(raktarButorokkal[i, j]);
-
+                        if(elemseged.Magassag + elem.Magassag < Magassag && (elemseged as AlacsonyButor).rahelyezhetoMegButor)
+                        {
+                            bool joHely = false;
+                            if (elem is NormalButor)
+                            {
+                                int minimum1 = Math.Min(elem.Szelesseg, elem.Hosszusag);
+                                int minumum2 = Math.Min(Math.Max(elem.Szelesseg, elem.Hosszusag), elem.Magassag);
+                                joHely = HelyEllenorzes(i, j, meddig1, meddig2, elemseged.ID);
+                            }
+                            else
+                            {
+                                joHely = HelyEllenorzes(i, j, meddig1, meddig2, elemseged.ID);
+                            }
+                            if (joHely == true)
+                            {
+                                if (elhelyez)
+                                {
+                                    elem.BalFelsoKoordinata = i.ToString() + " " + j.ToString();
+                                    if (elem is NormalButor)
+                                    {
+                                        (elemseged as AlacsonyButor).osszMagassag += Math.Max(elem.Magassag, Math.Max(elem.Szelesseg, elem.Hosszusag));
+                                        (elemseged as AlacsonyButor).rahelyezhetoMegButor = false;
+                                        (elemseged as AlacsonyButor).rajtaLevoButorIDk += elem.ID.ToString();
+                                    }
+                                    if (elem is AlloButor)
+                                    {
+                                        (elemseged as AlacsonyButor).osszMagassag += elem.Magassag;
+                                        (elemseged as AlacsonyButor).rahelyezhetoMegButor = false;
+                                        (elemseged as AlacsonyButor).rajtaLevoButorIDk += elem.ID.ToString();
+                                    }
+                                    if (elem is AlacsonyButor)
+                                    {
+                                        (elemseged as AlacsonyButor).osszMagassag += elem.Magassag;
+                                        (elemseged as AlacsonyButor).rajtaLevoButorIDk += elem.ID.ToString() + " ";
+                                    }
+                                }
+                                return true;
+                            }
+                        }
                     }
                 }
             }
@@ -189,7 +227,7 @@ namespace Sztf2_nhf
             elem.BalFelsoKoordinata = "";
         }
 
-        private bool HelyEllenorzes(int szel, int hossz, double elemSzel, double elemHossz)
+        private bool HelyEllenorzes(int szel, int hossz, double elemSzel, double elemHossz, int ID)
         {
             if (raktarButorokkal.GetLength(0) - szel - elemSzel < 0)
                 return false;
@@ -199,7 +237,7 @@ namespace Sztf2_nhf
             {
                 for (int j = hossz; j < hossz + elemHossz; j++)
                 {
-                    if (raktarButorokkal[i, j] != 0)
+                    if (raktarButorokkal[i, j] != ID)
                         return false;
                 }
             }
