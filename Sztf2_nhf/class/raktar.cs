@@ -108,36 +108,56 @@ namespace Sztf2_nhf
 
         public bool getHely(ButorAlap elem, bool elhelyez)
         {
-            for (int i = 0; i < raktarButorokkal.GetLength(0) - elem.Hosszusag; i++)
+            if (elem is NormalButor)
             {
-                for (int j = 0; j < raktarButorokkal.GetLength(1) - elem.Szelesseg; j++)
+                int minimum1 = Math.Min(elem.Szelesseg, elem.Hosszusag);
+                int minumum2 = Math.Min(Math.Max(elem.Szelesseg, elem.Hosszusag), elem.Magassag);
+                return raktarVegignez(elem, minimum1, minumum2, elhelyez);
+            }
+            else
+            {
+                return raktarVegignez(elem, elem.Hosszusag, elem.Szelesseg, elhelyez);
+            }
+            
+        }
+
+        private bool raktarVegignez(ButorAlap elem, int meddig1, int meddig2, bool elhelyez)
+        {
+            for (int i = 0; i < raktarButorokkal.GetLength(0) - meddig1; i++)
+            {
+                for (int j = 0; j < raktarButorokkal.GetLength(1) - meddig2; j++)
                 {
                     if (raktarButorokkal[i, j] == 0)
                     {
-                        bool joHely = HelyEllenorzes(i, j, elem.Szelesseg, elem.Hosszusag);
+                        bool joHely = HelyEllenorzes(i, j, meddig1, meddig2);
                         if (joHely == true)
                         {
                             if (elhelyez)
                             {
-                                Elemelhelyez(elem, i, j);
+                                Elemelhelyez(meddig1, meddig2, i, j, elem.ID);
                                 elem.BalFelsoKoordinata = i.ToString() + " " + j.ToString();
                             }
                             return true;
                         }
+                    }
+                    if (lista.IDthElem(raktarButorokkal[i, j]) is AlacsonyButor)
+                    {
+                        ButorAlap elemseged = lista.IDthElem(raktarButorokkal[i, j]);
+
                     }
                 }
             }
             return false;
         }
 
-        private void Elemelhelyez(ButorAlap elem, int szel, int hossz)
+        private void Elemelhelyez(int meddig1, int meddig2, int szel, int hossz, int ID)
         {
-            for (int j = hossz; j < hossz + elem.Szelesseg; j++)
+            for (int j = hossz; j < hossz + meddig2; j++)
             {
-                for (int k = szel; k < szel+ elem.Hosszusag; k++)
+                for (int k = szel; k < szel+ meddig1; k++)
                 {
                     
-                    raktarButorokkal[k, j] = elem.ID;
+                    raktarButorokkal[k, j] = ID;
                 }
             }
         }
@@ -145,11 +165,23 @@ namespace Sztf2_nhf
         public void ElemKivetel(int ID)
         {
             ButorAlap elem = lista.IDthElem(ID);
+            int minimum1;
+            int minimum2;
+            if (elem is NormalButor)
+            {
+                minimum1 = Math.Min(elem.Szelesseg, elem.Hosszusag);
+                minimum2 = Math.Min(Math.Max(elem.Szelesseg, elem.Hosszusag), elem.Magassag);
+            }
+            else
+            {
+                minimum1 = elem.Hosszusag;
+                minimum2 = elem.Szelesseg;
+            }
             int bal = int.Parse(elem.BalFelsoKoordinata.Split()[0]);
             int jobb = int.Parse(elem.BalFelsoKoordinata.Split()[1]);
-            for (int i = bal; i < bal + elem.Hosszusag; i++)
+            for (int i = bal; i < bal + minimum1; i++)
             {
-                for (int j = jobb; j < jobb + elem.Szelesseg; j++)
+                for (int j = jobb; j < jobb + minimum2; j++)
                 {
                     raktarButorokkal[i, j] = 0;
                 }
@@ -228,17 +260,29 @@ namespace Sztf2_nhf
                 {
                     HibaUzenet = "[ERR]Nincs benne a raktárban"
                 };
-            int balalsoKoordinata = int.Parse(elem.BalFelsoKoordinata.Split()[0]) + elem.Hosszusag + 1;
+            int minimum1;
+            int minimum2;
+            if (elem is NormalButor)
+            {
+                minimum1 = Math.Min(elem.Szelesseg, elem.Hosszusag);
+                minimum2 = Math.Min(Math.Max(elem.Szelesseg, elem.Hosszusag), elem.Magassag);
+            }
+            else
+            {
+                minimum1 = elem.Hosszusag;
+                minimum2 = elem.Szelesseg;
+            }
+            int balalsoKoordinata = int.Parse(elem.BalFelsoKoordinata.Split()[0]) + minimum1 + 1;
             int bal = int.Parse(elem.BalFelsoKoordinata.Split()[1]);
-            int jobb = bal + elem.Szelesseg;
+            int jobb = bal + minimum2;
             int db = 0;
             for (int i = bal; i < jobb; i++)//i,j-t felcserélni hogy hatékonyabb legyen
             {
                 for (int j = balalsoKoordinata; j < raktar.raktarButorokkal.GetLength(1); j++)
                 {
-                    if (!lista.Contains(raktar.raktarButorokkal[i, j]) && raktar.raktarButorokkal[i, j] != elem.ID)
+                    if (!lista.Contains(raktar.raktarButorokkal[j, i]) && raktar.raktarButorokkal[j, i] != elem.ID)
                     {
-                        lista[db++] = raktar.raktarButorokkal[i, j];
+                        lista[db++] = raktar.raktarButorokkal[j, i];
                     }
                 }
             }

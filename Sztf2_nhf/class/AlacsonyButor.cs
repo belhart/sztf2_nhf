@@ -8,10 +8,16 @@ namespace Sztf2_nhf
 {
     class AlacsonyButor : ButorAlap
     {
-
+        public bool rajtaVanButor { get; set; }
+        public bool rahelyezhetoMegButor { get; set; }
+        public int osszMagassag { get; set; }
+        public string rajtaLevoButorIDk { get; set; }
         public AlacsonyButor(int szel, int magas, int hossz, int ID) : base(szel, magas, hossz, ID)
         {
-
+            rajtaLevoButorIDk = "";
+            rajtaVanButor = false;
+            rahelyezhetoMegButor = true;
+            osszMagassag = magas;
         }
 
         public override string ToString()
