@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sztf2_nhf
 {
-    class NincsTobbHelyButornakTeljesRendezesUtanException : AlapException
+    class NincsARaktarbanException : AlapException
     {
-        public LancoltLista elemek { get; set; }
     }
 }

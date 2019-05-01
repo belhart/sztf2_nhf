@@ -34,7 +34,7 @@ namespace Sztf2_nhf
             lista = lista.ReID(lista,darabseged);
         }
 
-        public void OsszesButorElhelyezeseARaktarban()
+        public void OsszesButorElhelyezeseARaktarban(bool UjraRendezes)
         {
             bool van = false;
             int butorDarabSeged = ButorDarab;
@@ -47,13 +47,43 @@ namespace Sztf2_nhf
             }
             bool[] E = new bool[ButorDarab];
             BTS2.BTS(0,ref E, R,ref van, this);
-            Console.WriteLine("\n\nBefer-e(true/false) + annak a butornak az adatai");
-            for (int i = 0; i < ButorDarab; i++)
+            if (UjraRendezes)
             {
-                Console.Write(E[i] + " ");
-                Console.WriteLine(lista.IDthElem(i+1));
+                Console.WriteLine("\n\nBefer-e(true/false) teljes ujrarendezes utan + annak a butornak az adatai");
+                int i = 0;
+                LancoltLista masikRaktarbaKuldesButorok = new LancoltLista();
+                foreach (bool item in E)
+                {
+                    Console.Write(item + " ");
+                    Console.WriteLine(lista.NthElem(i));
+                    if (!item)
+                    {
+                        masikRaktarbaKuldesButorok.VegereBeszuras(lista.NthElem(i));
+                    }
+                i++;
+                }
+                if (masikRaktarbaKuldesButorok.DarabElem(masikRaktarbaKuldesButorok) != 0)
+                {
+                    for (int j = 0; j < masikRaktarbaKuldesButorok.DarabElem(masikRaktarbaKuldesButorok); j++)
+                    {
+                        lista.KitorolListabol(masikRaktarbaKuldesButorok.NthElem(j).ID, lista);
+                    }
+                    throw new NincsTobbHelyButornakTeljesRendezesUtanException()
+                    {
+                        HibaUzenet = "[ERR]Butor(ok)nak nincs hely teljes ujrarendezés után",
+                        elemek = masikRaktarbaKuldesButorok
+                    };
+                }
             }
-            Console.ReadLine();
+            else
+            {
+                Console.WriteLine("\n\nBefer-e(true/false) + annak a butornak az adatai");
+                for (int i = 0; i < ButorDarab; i++)
+                {
+                    Console.Write(E[i] + " ");
+                    Console.WriteLine(lista.NthElem(i));
+                }
+            }
             //BTS.Rendezes(0,ref raktarButorokkalseged, ref osszes,lista, this, butorDarabSeged);
         }
         
@@ -158,6 +188,7 @@ namespace Sztf2_nhf
             }
             raktar.ElemKivetel(ID);
             raktar.lista.KitorolListabol(ID, raktar.lista);
+            raktar.ButorDarab--;
             int kihozottDb = kihozottButorokLista.DarabElem(kihozottButorokLista);
             if (kihozottDb != 0)
             {
@@ -180,7 +211,11 @@ namespace Sztf2_nhf
                     }
                     else
                     {
-
+                        throw new NincsTobbHelyButornakTeljesRendezesElottException()
+                        {
+                            HibaUzenet = "[ERR]Egy butornak nem sikerült helyet találni",
+                            elem = kihozottButorokLista.NthElem(i)
+                        };
                     }
                 }
             }
@@ -188,6 +223,11 @@ namespace Sztf2_nhf
 
         private void Utbanvan(ref int[] lista, ButorAlap elem, Raktar raktar)
         {
+            if (elem == null || elem.BalFelsoKoordinata == null)
+                throw new NincsARaktarbanException()
+                {
+                    HibaUzenet = "[ERR]Nincs benne a raktárban"
+                };
             int balalsoKoordinata = int.Parse(elem.BalFelsoKoordinata.Split()[0]) + elem.Hosszusag + 1;
             int bal = int.Parse(elem.BalFelsoKoordinata.Split()[1]);
             int jobb = bal + elem.Szelesseg;

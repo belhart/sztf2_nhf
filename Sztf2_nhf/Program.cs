@@ -27,7 +27,7 @@ namespace Sztf2_nhf
             raktar.AdatHelyessegEllenorzes();
             Console.WriteLine("Sikeresen beolvasott butorok");
             raktar.lista.Bejaras();
-            raktar.OsszesButorElhelyezeseARaktarban();
+            raktar.OsszesButorElhelyezeseARaktarban(false);
             Console.WriteLine("Enter a folytatashoz");
             Console.ReadLine();
             bool vege = false;
@@ -47,10 +47,37 @@ namespace Sztf2_nhf
                         break;
                     case "2":
                         Console.Clear();
-                        Console.Write("Kihozni kivant butor ID-je");
                         raktar.RaktarGrafKiir();
+                        Console.Write("Kihozni kivant butor ID-je: ");
                         int kihozButorId = int.Parse(Console.ReadLine());
-                        raktar.ButorKihozatal(kihozButorId, raktar);
+                        if (kihozButorId <= 0 || kihozButorId > raktar.lista.DarabElem(raktar.lista))
+                        {
+                            Console.WriteLine("Az ID-nek nagyobbnak kell lennie mint 0 és kisebb mint " + (raktar.lista.DarabElem(raktar.lista)+1));
+                        }
+                        else
+                        {
+                            try
+                            {
+                                raktar.ButorKihozatal(kihozButorId, raktar);
+                            }
+                            catch(NincsARaktarbanException e)
+                            {
+                                Console.WriteLine(e.HibaUzenet);
+                            }
+                            catch (NincsTobbHelyButornakTeljesRendezesElottException)
+                            {
+                                raktar.raktarButorokkal = new int[raktar.Szelesseg, raktar.Hosszusag];
+                                raktar.OsszesButorElhelyezeseARaktarban(true);
+                            }
+                            catch (NincsTobbHelyButornakTeljesRendezesUtanException e)
+                            {
+                                Console.WriteLine(e.HibaUzenet);
+                                for (int i = 0; i < e.elemek.DarabElem(e.elemek); i++)
+                                {
+                                    Console.WriteLine(e.elemek.NthElem(i));
+                                }
+                            }
+                        }
                         Console.WriteLine("Enter a folytatashoz");
                         Console.ReadLine();
                         break;
