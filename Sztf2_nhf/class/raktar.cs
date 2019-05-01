@@ -207,7 +207,7 @@ namespace Sztf2_nhf
             elem.BalFelsoKoordinata = "";
         }
 
-        private bool HelyEllenorzes(int szel, int hossz, double elemSzel, double elemHossz, int ID)
+        private bool HelyEllenorzes(int szel, int hossz, int elemSzel, int elemHossz, int ID)
         {
             if (raktarButorokkal.GetLength(0) - szel - elemSzel < 0)
                 return false;
