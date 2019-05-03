@@ -1,4 +1,13 @@
 Bútorraktár
+
+
+ADATOK.TXT formátum:
+ 
+BÚTORFAJTA     SZÉLESSÉG MAGASSÁG HOSSZÚSÁG 
+
+ALLO|NORM|ALA       int       int    int
+
+
 Egy bútorraktár számára készítünk alkalmazást.
 1. A raktárban eltárolt bútorok téglatest alakú dobozokban vannak. Mindegyik
 doboznak van szélessége, hosszúsága és magassága.
