@@ -6,6 +6,7 @@ ADATOK.TXT formátum:
 BÚTORFAJTA     SZÉLESSÉG MAGASSÁG HOSSZÚSÁG 
 
 ALLO|NORM|ALA       int       int    int
+példa: a már létező adatok.txt a debug mappában
 
 
 Egy bútorraktár számára készítünk alkalmazást.
